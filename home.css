@@ -30,6 +30,16 @@ body{
   height: 100vh;
   background: var(--body-color);
 }
+/*resuable css*/
+.sidebar .text{
+  font-size: 16px;
+  font-weight: 500;
+}
+.sidebar .image{
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+}
 
 /*sidebar*/
 
@@ -52,4 +62,13 @@ body{
 .sidebar header .image-text{
   display: flex;
   align-items: center;
+}
+
+header .image-text .header-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.header-text .name{
+  font-weight: 600;
 }
