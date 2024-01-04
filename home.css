@@ -34,6 +34,7 @@ body{
 .sidebar .text{
   font-size: 16px;
   font-weight: 500;
+  color: var(--text-color);
 }
 .sidebar .image{
   min-width: 60px;
@@ -51,6 +52,10 @@ body{
   width: 250px;
   padding: 10px 14px;
   background: var(--sidebar-color);
+}
+
+.sidebar head{
+  position: relative;
 }
 
 
@@ -71,4 +76,18 @@ header .image-text .header-text{
 
 .header-text .name{
   font-weight: 600;
+}
+
+.header-text .profession{
+  margin-top: -2px;
+}
+
+.sidebar header.toggle{
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  background: var(--primary-color);
 }
