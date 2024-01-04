@@ -1,4 +1,5 @@
-body {background-color: #ffffff;
+body {background-color: #1E1E1E;
+    color: white
     ;}
 
     
@@ -19,4 +20,23 @@ body{
 .wrapper{
     width: 500px;
     background-color: #242424;
+    border-radius: 40px;
+    padding: 70px 50px;
+}
+
+label{
+    display: block;
+}
+
+input{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+    padding-left: 30px;
+    margin: 10px 0;
+}
+
+.title{
+    margin-bottom: 30px;
 }
