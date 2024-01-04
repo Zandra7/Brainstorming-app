@@ -16,7 +16,7 @@
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
   --text-color: #707070;
-  --icon-color: #707070;
+  --icon-color:  #707070
 
 
 
@@ -67,13 +67,14 @@ body{
 }
 
 .sidebar li .icon{
-font-size: 20px;
+  min-width: 60px;
+ font-size: 20px;
 }
 
 .sidebar li .icon,
-.sidebar li .text {
-  color: var(--icon-color); /* Use the variable for the icon color */
-}
+.sidebar li .text{
+  color: var(--text-color);
+  }
 
 .sidebar .image-text img{
   width: 40px;
@@ -115,5 +116,8 @@ header .image-text .header-text{
 }
 
 .sidebar li a{
+  height: 100%;
+  display: flex;
+  align-items: center;
   text-decoration: none;
 }
