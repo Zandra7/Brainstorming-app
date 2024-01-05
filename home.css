@@ -65,14 +65,21 @@ body{
   position: relative;
 }
 
-.sidebar li .icon{
+.sidebar li .icons{
+min-width: 60px;
 font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #000;
+cursor: default;
 }
 
 .sidebar li .icon,
 .sidebar li .text{
   color: var(--text-color);
-  }
+}
+
 
 .sidebar .image-text img{
   width: 40px;
@@ -111,4 +118,11 @@ header .image-text .header-text{
   border-radius: 50%;
   color: var(--sidebar-color);
   font-size: 22px;
+}
+
+.sidebar li a{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
