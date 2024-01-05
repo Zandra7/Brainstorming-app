@@ -1,5 +1,8 @@
 # Brainstorming-app
 
+## Beskrivelse
+(Her skal det være en beskrivelse av appen)
+
 ## Hvordan kjøre appen
 1. Klon prosjektet fra github
 2. Skriv "npm install" for å innstallere avhengigheter - Nå skal du ha fått en mappe kalt "node_modules"
