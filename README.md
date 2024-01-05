@@ -11,4 +11,6 @@
 ## Lenker og andre ressurser
 Figma design laget av Jan Filip: https://www.figma.com/file/wdplyE8l2h5unyyiRWoFnT/ideer-nettside?type=design&node-id=0%3A1&mode=design&t=KIxz6pRvEIpDR2Aw-1
 
-Trello https://trello.com/b/GXQsQAbw/brainstorming-app 
+Trello: https://trello.com/b/GXQsQAbw/brainstorming-app 
+
+Entity relation diagram: er.drawio (fil i repo)
