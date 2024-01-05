@@ -40,3 +40,8 @@ input{
 .title{
     margin-bottom: 30px;
 }
+
+a:link, a:visited {
+    color: white;
+  }
+  
