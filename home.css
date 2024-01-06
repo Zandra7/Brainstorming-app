@@ -1,5 +1,5 @@
 /*google font*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');*/
 
 *{
   font-family: 'Poppins', sans-serif;
@@ -20,7 +20,7 @@
 
 
 /*transition*/
---tran-03: all 0.2s ease;
+--tran-02: all 0.2s ease;
 --tran-03: all 0.3s ease;
 --tran-04: all 0.4s ease;
 --tran-05: all 0.5s ease; 
@@ -29,17 +29,6 @@
 body{
   height: 100vh;
   background: var(--body-color);
-}
-/*resuable css*/
-.sidebar .text{
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-color);
-}
-.sidebar .image{
-  min-width: 60px;
-  display: flex;
-  align-items: center;
 }
 
 /*sidebar*/
@@ -54,6 +43,19 @@ body{
   background: var(--sidebar-color);
 }
 
+.sidebar .text{
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.sidebar .image{
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+}
+
+
+
 .sidebar li{
   height: 50px;
   margin-top: 10px;
@@ -61,9 +63,8 @@ body{
   display: flex;
   align-items: center;
 }
-.sidebar header {
-  position: relative;
-}
+
+
 
 .sidebar li .icons{
 min-width: 60px;
@@ -80,8 +81,13 @@ cursor: default;
 .sidebar li .icon,
 .sidebar li .text{
   color: var(--text-color);
+  transform: var(--tran-02);
+
 }
 
+.sidebar header {
+  position: relative;
+}
 
 .sidebar .image-text img{
   width: 40px;
@@ -137,8 +143,22 @@ header .image-text .header-text{
 
 .sidebar li a{
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   text-decoration: none;
   border-radius: 6px;
+  transition: var(--tran-04);
+}
+
+
+.sidebar li a:hover{
+  background: var(--primary-color);
+}
+
+
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+color: var(--sidebar-color);
 }
