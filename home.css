@@ -141,7 +141,7 @@ header .image-text .header-text{
   background: var(--primary-color-light);
 }
 
-.sidebar li a{
+.sidebar li a {
   height: 100%;
   width: 100%;
   display: flex;
@@ -149,16 +149,21 @@ header .image-text .header-text{
   text-decoration: none;
   border-radius: 6px;
   transition: var(--tran-04);
+  padding: 1px 20px; /* Lagt til padding for å gi plass mellom ikon og tekst */
 }
 
+/*her justerer vi ikonets størrelse og mellomrom */
+.sidebar li a .icon {
+  font-size: 20px;
+  margin-right: 14px; 
+  ;
+}
 
-.sidebar li a:hover{
+.sidebar li a:hover {
   background: var(--primary-color);
 }
 
-
-
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-color: var(--sidebar-color);
+.sidebar li a:hover .text {
+  color: var(--sidebar-color);
 }
