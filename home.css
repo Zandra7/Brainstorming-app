@@ -156,7 +156,7 @@ header .image-text .header-text{
 .sidebar li a .icon {
   font-size: 20px;
   margin-right: 14px; 
-  ;
+  
 }
 
 .sidebar li a:hover {
@@ -166,4 +166,21 @@ header .image-text .header-text{
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text {
   color: var(--sidebar-color);
+}
+
+
+.sidebar .menu-bar{
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .mode-text {
+  padding-left: 35px ; 
+  margin-top: -125px;
+}
+
+.menu-bar .mode{
+  background: var(--primary-color-light);
 }
