@@ -176,11 +176,54 @@ header .image-text .header-text{
   justify-content: space-between;
 }
 
-.sidebar .mode-text {
-  padding-left: 35px ; 
-  margin-top: -125px;
-}
+
 
 .menu-bar .mode{
   background: var(--primary-color-light);
 }
+
+
+.sidebar .mode-text {
+  padding-left: 53px; 
+  margin-top: -125px;
+}
+
+.menu-bar .mode i {
+  margin-left: 25px; 
+}
+
+
+
+
+.menu-bar .mode .moon-sun{
+  height: 50px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+}
+.menu-bar .mode i{
+  position: absolute;
+}
+
+.menu-bar .mode i.sun{
+  opacity: 0;
+}
+
+.menu-bar .mode .toggle-switch{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ height: 100;
+ min-width: 60px;
+ background: red;
+}
+
+.toggle-switch .switch{
+  position: relative;
+  height: 22px;
+  width: 44px;
+  border-radius: 25px;
+  background: var(--toggle-color);
+  transition: var(--tran-05);
+}
+
