@@ -9,9 +9,9 @@ app.use(expressModul.json()) // tolke forespørsler som json
 app.use(expressModul.static(__dirname)) // hoste static filer
 
 // hente database
-let database = new sqliteModul.Database("database.db", function(feilmelding){
-    if(feilmelding){
-        console.error(feilmelding.message) // Viser error om det er noe galt
+let database = new sqliteModul.Database("database.db", function(error){
+    if(error){
+        console.error(error.message) // Viser error om det er noe galt
     } else {
         console.log("Database funnet") // viser at databasen er åpnet
     }
@@ -25,9 +25,9 @@ app.post("/", function(foresporsel, respons){
     let sqlSporring = "SELECT * FROM users WHERE username = ? AND password = ?" // ? er placeholder
     let parameter = [foresporsel.body.username, foresporsel.body.password] // parameterene som skal settes inn i spørringen
 
-    database.get(sqlSporring, parameter, function(feilmelding, rad){
-        if (feilmelding) {
-            respons.status(400).json({"Feilmelding":feilmelding.message})
+    database.get(sqlSporring, parameter, function(error, rad){
+        if (error) {
+            respons.status(400).json({"error":error.message})
             return
         }
         if (rad) {
@@ -37,7 +37,7 @@ app.post("/", function(foresporsel, respons){
             })
         } else {
             respons.status(400).json({
-                "feilmelding":"Feil brukernavn eller passord"
+                "error":"Feil brukernavn eller passord"
             })
         }
     })
@@ -45,9 +45,9 @@ app.post("/", function(foresporsel, respons){
 
 app.get("/profil/:id", function(foresporsel, respons){
     const id = foresporsel.params.id
-    database.get("SELECT * FROM users WHERE id = ?", id, function(feilmelding, rad){
-        if (feilmelding) {
-            respons.status(500).json({error: feilmelding.message})
+    database.get("SELECT * FROM users WHERE id = ?", id, function(error, rad){
+        if (error) {
+            respons.status(500).json({error: error.message})
             return
         } 
         if (rad) {

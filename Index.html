@@ -11,15 +11,17 @@
 <div class="wrapper">
     <h2 class="title">Login</h2>
     <form action="">
-        <label for="">Username</label>
-        <input type="text" placeholder="e.g sebea009">
-        <label for="">Password</label>
-        <input type="password" placeholder="Ditt passord her...">
-        <input type="Submit">
+        <label>Username</label>
+        <input id="username" type="text" placeholder="e.g sebea009">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Ditt passord her...">
+        <input onclick="login()" type="Submit">
         <a href="Signup.html">Dont have an account? Make one!</a>
     </form>
 </div>
-    
+
+<p id="error"></p>
+
 </body>
 <script src="script.js" charset="UTF-8"></script>
 </html>
