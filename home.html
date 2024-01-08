@@ -5,16 +5,13 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- link for css -->
+  <link rel="stylesheet" href="home.css">
 
-<!-- link for css -->
-<link rel="stylesheet" href="home.css">
+  <!-- link for icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-<!-- link for icons -->
-<link
- href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' 
- rel='stylesheet'>
-
- <title>sidebar menu | side Navigation bar</title>
+  <title>sidebar menu | side Navigation bar</title>
 </head>
 <body>
   <nav class="sidebar">
@@ -26,23 +23,22 @@
 
           <div class="text header-text">
             <span class="name">Brainstorm</span>
-            <span class="profession">status elev </span>
+            <span class="profession">status elev</span>
           </div>
         </div>
 
-
-        <i class='bx bx-chevron-right toggle' ></i>
+        <i class='bx bx-chevron-right toggle'></i>
     </header>
 
-<!-- dashboard Search -->
+    <!-- dashboard Search -->
     <div class="menu-bar">
       <div class="menu">
         <li class="search-box">
-            <i class='bx bx-search icons' ></i>
+            <i class='bx bx-search icons'></i>
             <input type="search" placeholder="search...">
         </li>
 
-        <!-- deshboard meny-->
+        <!-- dashboard menu -->
         <ul class="menu-links">
           <li class="nav-link">
             <a href="#">
@@ -82,41 +78,23 @@
               <span class="text nav-text">Rom ID 4</span>
             </a>
           </li>
-          <!-- rom id 5 -->
-          <li class="nav-link">
-            <a href="#">
-              <i class="bx bx-save icon"></i>
-              <span class="text nav-text">Rom ID 5</span>
-            </a>
-          </li>
         </ul>
       </div>
-
       <div class="bottom-content">
+        <li class="">
+          <a href="#">
+            <i class="bx bx-log-out icon"></i>
+            <span class="text nav-text">Help</span>
+          </a>
+        </li>
         <li class="">
           <a href="#">
             <i class="bx bx-log-out icon"></i>
             <span class="text nav-text">Logout</span>
           </a>
         </li>
-
-     <li class="mode">
-        <div class="moon-sun"></div>
-          <i class="bx bx-moon icon moon"></i>
-          <i class="bx bx-sun icon sun"></i>
-      </div>
-
-      <span class="mode-text text">Dark Mode</span>
-
-      <div class="toggle-switch">
-        <span class="switch"></span>
-      </div>
-
-    </li>
-
-       </div>
+      </div>      
     </div>
- </nav>
-
+  </nav>
 </body>
-</html> 
+</html>
