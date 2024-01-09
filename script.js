@@ -12,7 +12,7 @@ async function login(){
 
     if (respons.ok) {
         const data = await respons.json()
-        window.location.href = "home.html"
+        window.location.href = "home.html?id="+data.data.id
     } else {
         const data = await respons.json()
         document.getElementById("error").textContent = data.feilmelding
