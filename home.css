@@ -10,12 +10,12 @@
 }
 /*farger*/
 :root{
-  --body-color: #E4E9F7;
-  --sidebar-color: #fff;
-  --primary-color: #695cfe;
+  --body-color: #333554;
+  --sidebar-color: #0B0F2B;
+  --primary-color: #FFC107;
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
-  --text-color: #707070;
+  --text-color: #a0a0a0;
 
 
 
@@ -26,6 +26,7 @@
 --tran-05: all 0.5s ease; 
 
 }
+
 body{
   height: 100vh;
   background: var(--body-color);
@@ -67,15 +68,15 @@ body{
 
 
 .sidebar li .icons{
-min-width: 60px;
-font-size: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
+  min-width: 60px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-/*her fargene til linken og fjenre pil på iconet*/
-color: var(--text-color);
-cursor: default;
+  /*her fargene til linken og fjenre pil på iconet*/
+  color: var(--text-color);
+  cursor: default;
 }
 
 .sidebar li .icon,
@@ -161,11 +162,13 @@ header .image-text .header-text{
 
 .sidebar li a:hover {
   background: var(--primary-color);
+  transition: all 0.5s ease;
 }
 
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text {
   color: var(--sidebar-color);
+  transition: all 0.5s ease;
 }
 
 .bottom-content {
@@ -176,10 +179,24 @@ header .image-text .header-text{
   flex-direction: column;
 }
 
+i{
+  color: var(--text-color);
+  font-size: 20px;
+}
 
 
+.material-symbols-outlined{
+  color: var(--text-color);
+  font-size: 20px;
+  float: right;
+  margin-top: -30px;
+}
 
-
+.material-symbols-outlined:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
 
 
 /* hvis jeg får tid fikser jeg dark mode knappen
