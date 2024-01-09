@@ -43,6 +43,19 @@ app.post("/", function(foresporsel, respons){
     })
 })
 
+app.post("/signup", function(request, response) {
+    const username = request.body.username;
+    const password = request.body.password;
+    const insertSql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    database.run(insertSql, [username, password], function(error) {
+        if (error) {
+            response.status(500).json({"error": error.message});
+            return;
+        }
+        response.json({ "message": "User created successfully" });
+    });
+});
+
 app.get("/profil/:id", function(foresporsel, respons){
     const id = foresporsel.params.id
     database.get("SELECT * FROM users WHERE id = ?", id, function(error, rad){

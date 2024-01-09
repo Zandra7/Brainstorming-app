@@ -12,14 +12,16 @@
     <h2 class="title">Sign Up</h2>
     <form action="">
         <label for="">Username</label>
-        <input type="text" placeholder="e.g sebea009">
+        <input id="signup-username" type="text" placeholder="e.g sebea009">
         <label for="">Password</label>
-        <input type="password" placeholder="Ditt passord her...">
-        <input type="Submit">
+        <input id="signup-password" type="password" placeholder="Ditt passord her...">
+        <input onclick="signup()" type="Submit">
         <a href="Index.html">Already have an account? Log in!</a>
     </form>
 </div>
-    
+
+<p id="signup-error"></p>
+
 </body>
 <script src="script.js" charset="UTF-8"></script>
 </html>
