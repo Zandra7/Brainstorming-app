@@ -9,6 +9,7 @@ body {
 }
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -44,4 +45,16 @@ button {
 }
 a:link, a:visited {
     color: white;
+}
+h1 {
+    font-size: 5rem;
+    padding-block-start: 3.7rem;
+    padding-inline-end: 2rem;
+}
+#tittel {
+    display: flex;
+    padding-bottom: 2rem;
+}
+img {
+    width: 150px;
 }
