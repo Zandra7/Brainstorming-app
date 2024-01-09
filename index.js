@@ -21,22 +21,22 @@ app.get('/', function(forespørsel, response){
     response.sendFile(path.join(__dirname, 'index.html'))
 })
 
-app.post("/", function(foresporsel, respons){
+app.post("/", function(request, response){
     let sqlSporring = "SELECT * FROM users WHERE username = ? AND password = ?" // ? er placeholder
-    let parameter = [foresporsel.body.username, foresporsel.body.password] // parameterene som skal settes inn i spørringen
+    let parameter = [request.body.username, request.body.password] // parameterene som skal settes inn i spørringen
 
     database.get(sqlSporring, parameter, function(error, rad){
         if (error) {
-            respons.status(400).json({"error":error.message})
+            response.status(400).json({"error":error.message})
             return
         }
         if (rad) {
-            respons.json({
+            response.json({
                 "melding":"suksess",
                 "data": rad
             })
         } else {
-            respons.status(400).json({
+            response.status(400).json({
                 "error":"Feil brukernavn eller passord"
             })
         }
@@ -56,17 +56,17 @@ app.post("/signup", function(request, response) {
     });
 });
 
-app.get("/profil/:id", function(foresporsel, respons){
-    const id = foresporsel.params.id
+app.get("/profil/:id", function(request, response){
+    const id = request.params.id
     database.get("SELECT * FROM users WHERE id = ?", id, function(error, rad){
         if (error) {
-            respons.status(500).json({error: error.message})
+            response.status(500).json({error: error.message})
             return
         } 
         if (rad) {
-            respons.json(rad)
+            response.json(rad)
         } else {
-            respons.status(404).json({error: "Ingen bruker med denne IDen finnes"})
+            response.status(404).json({error: "Ingen bruker med denne IDen finnes"})
         }
     })
 })
