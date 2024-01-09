@@ -23,8 +23,7 @@ async function signup(event){
     event.preventDefault(); // Prevent the form from submitting
     const signupUsername = document.getElementById("signup-username").value;
     const signupPassword = document.getElementById("signup-password").value;
-
-    console.log("kjører")
+    
     const response = await fetch("/signup", {
         method: "POST",
         headers: {
