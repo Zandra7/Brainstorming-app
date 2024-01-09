@@ -19,7 +19,8 @@ async function login(){
     }
 }
 
-async function signup(){
+async function signup(event){
+    event.preventDefault(); // Prevent the form from submitting
     const signupUsername = document.getElementById("signup-username").value;
     const signupPassword = document.getElementById("signup-password").value;
 
@@ -29,7 +30,8 @@ async function signup(){
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({signupUsername, signupPassword})
+        body: JSON.stringify({username: signupUsername, password: signupPassword})
+
     });
 
     if (response.ok) {
