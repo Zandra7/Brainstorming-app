@@ -38,6 +38,6 @@ async function signup(event){
         window.location.href = "Index.html"; // Redirect til index.html
     } else {
         const data = await response.json();
-        document.getElementById("signup-error").textContent = data.error;
+        document.getElementById("error").textContent = data.error;
     }
 }
