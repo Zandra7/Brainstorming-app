@@ -1,5 +1,6 @@
-async function login(){ // Login funksjonen
-    const username = document.getElementById("username").value  
+async function login(event){
+    event.preventDefault(); // Prevent the form from submitting
+    const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
     const respons = await fetch("/", { // Fetcher fra / pathen
