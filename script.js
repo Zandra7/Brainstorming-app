@@ -16,7 +16,7 @@ async function login(event){
         window.location.href = "home.html?id="+data.data.id // Redirect til home.html
     } else {
         const data = await respons.json() 
-        document.getElementById("error").textContent = data.feilmelding
+        document.getElementById("error").textContent = data.error
     }
 }
 
