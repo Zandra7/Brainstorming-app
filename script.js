@@ -39,5 +39,6 @@ async function signup(event){
     } else {
         const data = await response.json();
         document.getElementById("error").textContent = data.error;
+        console.log(data.error);
     }
 }

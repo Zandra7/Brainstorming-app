@@ -36,9 +36,7 @@ app.post("/", function(request, response){
                 "data": row 
             })
         } else { 
-            response.status(400).json({
-                "error":"Feil brukernavn eller passord"
-            })
+            response.status(400).json({"error":"Feil brukernavn eller passord"}) // sender tilbake melding om at det er feil brukernavn eller passord
         }
     })
 })
@@ -49,10 +47,16 @@ app.post("/signup", function(request, response) { // registrere ny bruker
     const insertSql = "INSERT INTO users (username, password) VALUES (?, ?)"; // spørring for å legge til bruker i databasen
     database.run(insertSql, [username, password], function(error) { // kjører spørringen
         if (error) {
-            response.status(500).json({"error": error.message});
+            if (error.errno === 19){
+                response.status(500).json({"error": "User already exists"}); // sender tilbake melding om at brukeren allerede eksisterer
+                return;
+            }
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
             return;
         }
-        response.json({ "message": "User created successfully" }); // sender tilbake melding om at brukeren er opprettet
+        else {
+            response.json({ "message": "User created successfully"}); // sender tilbake melding om at brukeren er opprettet
+        }
     });
 });
 
