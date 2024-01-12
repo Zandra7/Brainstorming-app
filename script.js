@@ -1,5 +1,5 @@
 async function login(event){
-    event.preventDefault(); // Prevent the form from submitting
+    event.preventDefault(); // Hindrer formen fra å submitte
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
