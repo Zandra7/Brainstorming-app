@@ -27,7 +27,7 @@ app.post("/", function(request, response){
 
     database.get(sqlSporring, parameter, function(error, row){ // kjører spørringen
         if (error) { 
-            response.status(400).json({"error":error.message}) 
+            response.status(500).json({"error":error.message}) // internal database error
             return
         }
         if (row) { // hvis det er en rad i databasen med det brukernavnet og passordet
