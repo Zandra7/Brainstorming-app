@@ -76,7 +76,7 @@
         <li class="ny-Rom">
           <a href="#">
             <i class="bx bx-add-to-queue icon"></i> <!-- ikon ved siden av tekst -->
-            <span class="text nav-text">Lag nytt rom</span>
+            <span class="text nav-text" onclick="hideBtn()">Lag nytt rom</span>
           </a>
         </li>
       </div>
@@ -85,9 +85,9 @@
     <main>
       <div class="title">
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
-        <div class="button-container">
-          <button>Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
-          <button>Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+        <div class="button-container" id="roomBtn">
+          <button onclick="hideBtn()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
+          <button onclick="hideBtn()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
         </div>
       </div>
     </main>

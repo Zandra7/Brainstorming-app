@@ -3,6 +3,12 @@ const id = urlParameter.get("id")
 
 const user = document.getElementById("user")
 
+const roomBtn = document.getElementById("roomBtn")
+
+function hideBtn() {
+    roomBtn.style.display = "none"
+}
+
 fetch("/user?id=" + id)
 .then(response => response.json())
 .then(function(data){
