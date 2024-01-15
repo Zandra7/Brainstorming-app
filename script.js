@@ -1,5 +1,5 @@
 async function login(event){
-    event.preventDefault(); // Prevent the form from submitting
+    event.preventDefault(); // Hindrer formen fra å submitte
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
@@ -16,7 +16,7 @@ async function login(event){
         window.location.href = "home.html?id="+data.data.id // Redirect til home.html
     } else {
         const data = await respons.json() 
-        document.getElementById("error").textContent = data.feilmelding
+        document.getElementById("error").textContent = data.error
     }
 }
 
@@ -38,6 +38,7 @@ async function signup(event){
         window.location.href = "Index.html"; // Redirect til index.html
     } else {
         const data = await response.json();
-        document.getElementById("signup-error").textContent = data.error;
+        document.getElementById("error").textContent = data.error;
+        console.log(data.error);
     }
 }
