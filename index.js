@@ -17,8 +17,28 @@ let database = new sqliteModul.Database("database.db", function(error){
     }
 })
 
-app.get('/', function(forespørsel, response){
+app.get('/', function(request, response){
     response.sendFile(path.join(__dirname, 'index.html')) // sender deg til index.html
+})
+
+app.get('/user', function(request, response){
+    let sqlSporring = "SELECT * FROM users WHERE id = ?" // spørring for å hente bruker med en bestemt id
+    let parameter = [request.query.id] // parameteren som skal settes inn i spørringen
+
+    database.get(sqlSporring, parameter, function(error, row) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error":error.message}) // internal database error
+            return
+        }
+        if (row) { // hvis det er en rad i databasen med den id-en
+            response.json({
+                "melding":"suksess",
+                "data": row 
+            })
+        } else {
+            response.status(400).json({"error":"Bruker ikke funnet"}) // sender tilbake melding om at brukeren ikke ble funnet
+        }
+    })
 })
 
 app.post("/", function(request, response){
@@ -27,7 +47,7 @@ app.post("/", function(request, response){
 
     database.get(sqlSporring, parameter, function(error, row){ // kjører spørringen
         if (error) { 
-            response.status(400).json({"error":error.message}) 
+            response.status(500).json({"error":error.message}) // internal database error
             return
         }
         if (row) { // hvis det er en rad i databasen med det brukernavnet og passordet
@@ -35,10 +55,9 @@ app.post("/", function(request, response){
                 "melding":"suksess",
                 "data": row 
             })
+            console.log("Logget inn", row)
         } else { 
-            response.status(400).json({
-                "error":"Feil brukernavn eller passord"
-            })
+            response.status(400).json({"error":"Feil brukernavn eller passord"}) // sender tilbake melding om at det er feil brukernavn eller passord
         }
     })
 })
@@ -49,10 +68,16 @@ app.post("/signup", function(request, response) { // registrere ny bruker
     const insertSql = "INSERT INTO users (username, password) VALUES (?, ?)"; // spørring for å legge til bruker i databasen
     database.run(insertSql, [username, password], function(error) { // kjører spørringen
         if (error) {
-            response.status(500).json({"error": error.message});
+            if (error.errno === 19){
+                response.status(500).json({"error": "User already exists"}); // sender tilbake melding om at brukeren allerede eksisterer
+                return;
+            }
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
             return;
         }
-        response.json({ "message": "User created successfully" }); // sender tilbake melding om at brukeren er opprettet
+        else {
+            response.json({ "message": "User created successfully"}); // sender tilbake melding om at brukeren er opprettet
+        }
     });
 });
 
