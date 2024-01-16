@@ -28,6 +28,10 @@ body {
   background: var(--body-color);
 }
 
+.reload:hover {
+  cursor: pointer;
+}
+
 /*sidebar*/
 .sidebar {
   position: fixed;

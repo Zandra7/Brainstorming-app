@@ -6,12 +6,16 @@ const user = document.getElementById("user")
 const roomBtn = document.getElementById("roomBtn")
 const writeWrapper = document.getElementById("writeWrapper")
 
+function reload() { // Reloader siden | Skal egentlig bare ta deg tilbake så du kan se de to knappene igjen
+    location.reload()
+}
+
 function hideBtn() {
     roomBtn.style.display = "none"
     writeWrapper.style.display = "block"
 }
 
-fetch("/user?id=" + id)
+fetch("/user?id=" + id) 
 .then(response => response.json())
 .then(function(data){
     console.log("Fetch user returnerte:", data)
