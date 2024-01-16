@@ -9,7 +9,7 @@ Brainstorming er en kreativ plattform som gir deg og dine venner muligheten til 
 3. Skriv "node index.js" i terminalen for å kjøre appen
 
 ## Brukermanual
-[Link til pdf fil](Brukermanual%20Nettside%20for%20Medieproduksjon%20med%20Alf%20Johannesen.pdf)
+[Link til skriftlig brukermanual](Brukermanual%20Nettside%20for%20Medieproduksjon%20med%20Alf%20Johannesen.pdf)
 
 
 
