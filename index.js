@@ -2,8 +2,8 @@ const expressModul = require('express')
 const pathModul = require('path')
 const sqliteModul = require('sqlite3').verbose()
 
-const app = expressModul() // express modul instans
-const portNummer = 3000
+const app = expressModul()
+const portNummer = 3000 // portnummeret serveren skal kjøre på
 
 app.use(expressModul.json()) // tolke forespørsler som json
 app.use(expressModul.static(__dirname)) // hoste static filer
@@ -11,53 +11,76 @@ app.use(expressModul.static(__dirname)) // hoste static filer
 // hente database
 let database = new sqliteModul.Database("database.db", function(error){
     if(error){
-        console.error(error.message) // Viser error om det er noe galt
+        console.error(error.message) // viser error om det er noe galt
     } else {
-        console.log("Database funnet") // viser at databasen er åpnet
+        console.log("Database funnet") // skriver i konsollen at databasen er funnet
     }
 })
 
-app.get('/', function(forespørsel, response){
-    response.sendFile(path.join(__dirname, 'index.html'))
+app.get('/', function(request, response){
+    response.sendFile(path.join(__dirname, 'index.html')) // sender deg til index.html
 })
 
-app.post("/", function(foresporsel, respons){
-    let sqlSporring = "SELECT * FROM users WHERE username = ? AND password = ?" // ? er placeholder
-    let parameter = [foresporsel.body.username, foresporsel.body.password] // parameterene som skal settes inn i spørringen
+app.get('/user', function(request, response){
+    let sqlSporring = "SELECT * FROM users WHERE id = ?" // spørring for å hente bruker med en bestemt id
+    let parameter = [request.query.id] // parameteren som skal settes inn i spørringen
 
-    database.get(sqlSporring, parameter, function(error, rad){
+    database.get(sqlSporring, parameter, function(error, row) { // kjører spørringen
         if (error) {
-            respons.status(400).json({"error":error.message})
+            response.status(500).json({"error":error.message}) // internal database error
             return
         }
-        if (rad) {
-            respons.json({
+        if (row) { // hvis det er en rad i databasen med den id-en
+            response.json({
                 "melding":"suksess",
-                "data": rad
+                "data": row 
             })
         } else {
-            respons.status(400).json({
-                "error":"Feil brukernavn eller passord"
-            })
+            response.status(400).json({"error":"Bruker ikke funnet"}) // sender tilbake melding om at brukeren ikke ble funnet
         }
     })
 })
 
-app.get("/profil/:id", function(foresporsel, respons){
-    const id = foresporsel.params.id
-    database.get("SELECT * FROM users WHERE id = ?", id, function(error, rad){
-        if (error) {
-            respons.status(500).json({error: error.message})
+app.post("/", function(request, response){
+    let sqlSporring = "SELECT * FROM users WHERE username = ? AND password = ?" // ? = placeholder
+    let parameter = [request.body.username, request.body.password] // parameterene som skal settes inn i spørringen
+
+    database.get(sqlSporring, parameter, function(error, row){ // kjører spørringen
+        if (error) { 
+            response.status(500).json({"error":error.message}) // internal database error
             return
-        } 
-        if (rad) {
-            respons.json(rad)
-        } else {
-            respons.status(404).json({error: "Ingen bruker med denne IDen finnes"})
+        }
+        if (row) { // hvis det er en rad i databasen med det brukernavnet og passordet
+            response.json({
+                "melding":"suksess",
+                "data": row 
+            })
+            console.log("Logget inn", row)
+        } else { 
+            response.status(400).json({"error":"Feil brukernavn eller passord"}) // sender tilbake melding om at det er feil brukernavn eller passord
         }
     })
 })
 
-app.listen(portNummer, function(){
+app.post("/signup", function(request, response) { // registrere ny bruker
+    const username = request.body.username; 
+    const password = request.body.password; 
+    const insertSql = "INSERT INTO users (username, password) VALUES (?, ?)"; // spørring for å legge til bruker i databasen
+    database.run(insertSql, [username, password], function(error) { // kjører spørringen
+        if (error) {
+            if (error.errno === 19){
+                response.status(500).json({"error": "User already exists"}); // sender tilbake melding om at brukeren allerede eksisterer
+                return;
+            }
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            return;
+        }
+        else {
+            response.json({ "message": "User created successfully"}); // sender tilbake melding om at brukeren er opprettet
+        }
+    });
+});
+
+app.listen(portNummer, function(){ // starter serveren
     console.log(`Server kjører på http://localhost:${portNummer}`)
 })

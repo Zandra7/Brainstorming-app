@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="Stylesheet" href="Style.css">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div id="tittel">
-        <h1>Brainstorming</h1>
-        <img src="Bilder/noun-brainstorm-2909385-FFFFFF (1).svg" alt="">
-    </div>
-    <div class="wrapper">
-        <h2 class="title">Login</h2>
-        <form action="">
-            <label for="">Username</label>
-            <input type="text" placeholder="e.g sebea009">
-            <label for="">Password</label>
-            <input type="password" placeholder="Ditt passord her...">
-            <button>Submit</button>
-            <a href="Signup.html">Dont have an account? Make one!</a>
-        </form>
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Brainstorm</title>
+        <link rel="Stylesheet" href="Style.css"> <!-- linke til stylesheet -->
+    </head>
+    <body>
+        <div id="tittel">
+            <h1>Brainstorming</h1> <!-- Navn på web-app-->
+            <img src="Bilder/noun-brainstorm-2909385-FFFFFF (1).svg" alt=""> <!-- logo -->
+        </div>
 
-<p id="error"></p>
-
-</body>
-<script src="script.js" charset="UTF-8"></script>
+        <!-- login boks -->
+        <div class="wrapper"> 
+            <h2 class="title">Login</h2>
+            <form onsubmit="login(event)">
+                <label>Username</label> <!-- input til brukernavn -->
+                <input id="username" type="text" placeholder="e.g sebea009"> <!-- eksempel for å gjøre det lettere for brukere -->
+                <label>Password</label> <!-- input til passord -->
+                <input id="password" type="password" placeholder="Ditt passord her..."> <!-- hjelpetekst for å guide brukere -->
+                <input onclick="login()" type="Submit"> <!-- "submit" knapp som kjører funksjonen login som tar deg til hjemmesiden dersom brukernavn og passord er riktig-->
+                <a href="Signup.html">Dont have an account? Make one!</a> <!-- knapp for å lage ny bruker -->
+                <p id="error"></p>
+            </form>
+        </div>
+    </body>
+    <script src="script.js" charset="UTF-8"></script> <!-- link til skript-filen-->
 </html>
