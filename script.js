@@ -3,7 +3,7 @@ async function login(event){
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
-    const respons = await fetch("/", { // Fetcher fra / pathen
+    const respons = await fetch("/login", { // Fetcher fra /login pathen
         method:"POST", 
         headers:{
             "Content-Type":"application/json"
@@ -36,6 +36,28 @@ async function signup(event){
     if (response.ok) {
         const data = await response.json();
         window.location.href = "Index.html"; // Redirect til index.html
+    } else {
+        const data = await response.json();
+        document.getElementById("error").textContent = data.error;
+        console.log(data.error);
+    }
+}
+
+async function createSession() {
+    const urlParameter = new URLSearchParams(window.location.search)
+    const id = urlParameter.get("id")    
+
+    const response = await fetch("/session", { // Fetcher fra /session pathen
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({owner: id}) // Sender id-en til brukeren som eier rommet
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
     } else {
         const data = await response.json();
         document.getElementById("error").textContent = data.error;

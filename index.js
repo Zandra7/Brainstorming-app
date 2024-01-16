@@ -41,7 +41,7 @@ app.get('/user', function(request, response){
     })
 })
 
-app.post("/", function(request, response){
+app.post("/login", function(request, response){
     let sqlSporring = "SELECT * FROM users WHERE username = ? AND password = ?" // ? = placeholder
     let parameter = [request.body.username, request.body.password] // parameterene som skal settes inn i spørringen
 
@@ -73,13 +73,47 @@ app.post("/signup", function(request, response) { // registrere ny bruker
                 return;
             }
             response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
-            return;
+            return;x
         }
         else {
             response.json({ "message": "User created successfully"}); // sender tilbake melding om at brukeren er opprettet
         }
     });
 });
+
+app.post("/session", function(request, response) { // lage nytt rom
+    const owner = request.body.owner; 
+    const insertSql = "INSERT INTO sessions (owner) VALUES (?)"; // spørring for å legge til rom i databasen
+    database.run(insertSql, [owner], function(error) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            return;
+        }
+        else {
+            console.log("Nytt rom har id=",this.lastID);
+            response.json({ // sender tilbake melding om at rommet er opprettet
+                "message": "Session created successfully",
+                "data": {
+                    "new_sessionid" : this.lastID,
+                    "owner": owner
+                }
+            });
+        }
+    });
+})
+
+app.get("/session", function(request, response) { // hente alle rom
+    let sqlSporring = "SELECT * FROM sessions"; // spørring for å hente alle rom
+    database.all(sqlSporring, function(error, rows) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            return;
+        }
+        else {
+            response.json({ "message": "Sessions fetched successfully", "data": rows}); // sender tilbake melding om at rommene er hentet
+        }
+    });
+})
 
 app.listen(portNummer, function(){ // starter serveren
     console.log(`Server kjører på http://localhost:${portNummer}`)
