@@ -70,15 +70,30 @@
             </a>
           </li>
         </div> 
+        <!-- "Lag nytt rom" knapp neders på sideskjermen -->
+        <li class="ny-Rom">
+          <a href="#">
+            <i class="bx bx-add-to-queue icon"></i> <!-- ikon ved siden av tekst -->
+            <span class="text nav-text" onclick="hideBtn()">Lag nytt rom</span>
+          </a>
+        </li>
       </div>
     </nav>
     <!-- Det som visers utenfor sidebaren -->
     <main>
       <div class="title">
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
-        <div class="button-container">
-          <button>Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
-          <button>Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+        <div class="button-container" id="roomBtn">
+          <button onclick="hideBtn()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
+          <button onclick="hideBtn()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+        </div>
+      </div>
+
+      <!-- Felt for å skrive ideer -->
+      <div id="writeWrapper">
+        <div class="write-field">
+          <input type="text" class="addIdea" placeholder="Skriv en ide">
+          <i class='bx bx-send'></i>
         </div>
       </div>
     </main>
