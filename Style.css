@@ -29,12 +29,13 @@ input {
     height: 50px;
     border: none;
     border-radius: 50px;
-    /* padding-left: 30px; */
+    padding-left: 30px;
     margin: 10px 0;
     border-radius: 6px;
     color: gray;
     background-color: #0f163d;
-    border:  solid rgb(185, 185, 185);
+    border: solid 1px #FFC107;
+    box-shadow: 2px 2px #ffc310;
 }
 button {
     width: 100%;
