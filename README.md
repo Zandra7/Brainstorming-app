@@ -1,7 +1,7 @@
 # Brainstorming-app
 
 ## Beskrivelse
-(Her skal det være en beskrivelse av appen)
+Brainstorming er en kreativ plattform som gir deg og dine venner muligheten til å visualisere og samarbeide om deres ideer. I appen kan dere skrive og dele deres ideer gjennom post-it lapper som vises anonymt for de andre.
 
 ## Hvordan kjøre appen
 1. Klon prosjektet fra github
