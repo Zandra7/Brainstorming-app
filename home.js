@@ -10,12 +10,12 @@ function reload() { // Reloader siden | Skal egentlig bare ta deg tilbake så du
     location.reload()
 }
 
-function hideBtn() {
+function hideBtn() { // Skjuler knappen for å lage rom og viser skjemaet for å skrive meldinger
     roomBtn.style.display = "none"
     writeWrapper.style.display = "block"
 }
 
-fetch("/user?id=" + id) 
+fetch("/user?id=" + id) // Fetcher brukeren med id-en som ble sendt med fra login.js
 .then(response => response.json())
 .then(function(data){
     console.log("Fetch user returnerte:", data)
