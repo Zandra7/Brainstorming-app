@@ -217,3 +217,30 @@ margin-top: 13rem;
   align-items: center;
   margin-top: 10rem;
 }
+
+#writeWrapper {
+  display: none;
+}
+
+.write-field {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin-left: 250px;
+}
+
+.addIdea {
+  padding: 10px;
+  padding-right: 40px;
+  width: 60%;
+  border-radius: 6px;
+}
+
+.write-field i {
+  position: absolute;
+  right: 21%;
+  bottom: 10px;
+}

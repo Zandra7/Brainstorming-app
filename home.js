@@ -4,9 +4,11 @@ const id = urlParameter.get("id")
 const user = document.getElementById("user")
 
 const roomBtn = document.getElementById("roomBtn")
+const writeWrapper = document.getElementById("writeWrapper")
 
 function hideBtn() {
     roomBtn.style.display = "none"
+    writeWrapper.style.display = "block"
 }
 
 fetch("/user?id=" + id)
