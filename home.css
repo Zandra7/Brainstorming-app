@@ -243,6 +243,7 @@ margin-top: 13rem;
   position: absolute;
   right: 21%;
   bottom: 10px;
+  cursor: pointer;
 }
 
 .sidebar li a:hover {
