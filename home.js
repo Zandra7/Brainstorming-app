@@ -63,7 +63,35 @@ async function joinSession() {
         document.getElementById("error").textContent = data.error;
         console.log(data.error);
     }
-    
+}
+
+async function addIdea() {
+    const content = document.getElementById("idea").value;
+    const urlParameter = new URLSearchParams(window.location.search)
+    const userId = urlParameter.get("id")    
+    const sessionId = urlParameter.get("session")
+
+    const response = await fetch("/addidea", { // Fetcher fra /session pathen
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({content: content, userid: userId, sessionid: sessionId}) // Sender id-en til brukeren som eier rommet
+    });
+    console.log("addIdea har fetchet")
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log("addIdea har fått ok")
+        const ideas = document.getElementById("ideas")
+        const idea = document.createElement("li")
+        idea.textContent = content
+        ideas.appendChild(idea)
+    } else {
+        const data = await response.json();
+        document.getElementById("error").textContent = data.error;
+        console.log(data.error);
+    }
 }
  
 fetch("/user?id=" + id) // Fetcher brukeren med id-en som ble sendt med fra login.js
@@ -88,4 +116,22 @@ if (session) {
     writeWrapper.style.display = "block"
 
     rom.textContent = "Rom: " + session
+
+    fetch("/ideas?sessionid=" + session) // Fetcher ideene med session-id-en som ble sendt med fra login.js
+        .then(response => response.json())
+        .then(function(data){
+            console.log("Fetch ideas returnerte:", data)
+            if (data.error) {
+                document.getElementById("error").textContent = data.error 
+            } 
+            else {
+                const ideas = document.getElementById("ideas")
+                for (let i = 0; i < data.data.length; i++) {
+                    const idea = document.createElement("li")
+                    idea.textContent = data.data[i].content
+                    ideas.appendChild(idea)
+                }
+            }
+        })
+        .catch(error => console.error("Error:", error))
 }

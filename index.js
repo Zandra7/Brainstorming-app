@@ -73,7 +73,7 @@ app.post("/signup", function(request, response) { // registrere ny bruker
                 return;
             }
             response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
-            return;x
+            return;
         }
         else {
             response.json({ "message": "User created successfully"}); // sender tilbake melding om at brukeren er opprettet
@@ -139,6 +139,53 @@ app.post("/join", function(request, response) {
             }
         }
     });
+})
+
+app.post("/addidea", function(request, response) { // legge til ide i rom
+    const sessionid = request.body.sessionid;
+    const userid = request.body.userid;
+    const content = request.body.content;
+
+    const insertSql = "INSERT INTO ideas (session_id, user_id, content) VALUES (?, ?, ?)"; // spørring for å legge til ide i rom
+    database.run(insertSql, [sessionid, userid, content], function(error) { // kjører spørringen
+        console.log(sessionid, userid, content)
+        if (error) {
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            return;
+        }
+        else {
+            response.json({ // sender tilbake melding om at ideen er lagt til
+                "message": "Idea added successfully",
+                "data": {
+                    "new_ideaid" : this.lastID, 
+                    // trenger egentlig ikke sende dette tilbake til klienten
+                    "sessionid": sessionid,
+                    "userid": userid,
+                    "content": content
+                }
+            });
+        }
+    });
+})
+
+app.get('/ideas', function(request, response){
+    let sqlSporring = "SELECT * FROM ideas WHERE session_id = ? ORDER BY id" // spørring for å hente ideer med en bestemt session-id
+    let parameter = [request.query.sessionid] // parameteren som skal settes inn i spørringen
+
+    database.all(sqlSporring, parameter, function(error, rows) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error":error.message}) // internal database error
+            return
+        }
+        if (rows) { // hvis det er en rad i databasen med den session-id-en
+            response.json({
+                "melding":"suksess",
+                "data": rows 
+            })
+        } else {
+            response.status(400).json({"error":"Ideer ikke funnet"}) // sender tilbake melding om at ideene ikke ble funnet
+        }
+    })
 })
 
 app.listen(portNummer, function(){ // starter serveren
