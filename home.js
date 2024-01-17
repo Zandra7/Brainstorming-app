@@ -38,10 +38,32 @@ function createSession() {
     .catch(error => console.error("Error:", error))
 }
 
-function joinSession() {
-    if (roomInput.value) {
+async function joinSession() {
+    console.log("joinSession kjører")
+    const sessionId = document.getElementById("roomInput").value;
 
+    const urlParameter = new URLSearchParams(window.location.search)
+    const userId = urlParameter.get("id")    
+
+    const response = await fetch("/join", { // Fetcher fra /session pathen
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({sessionid: sessionId, userid: userId}) // Sender id-en til brukeren som eier rommet
+    });
+    console.log("joinSession har fetchet")
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log("joinSession har fått ok")
+        window.location.href = "home.html?id="+userId+"&session="+sessionId // Redirect til session.html
+    } else {
+        const data = await response.json();
+        document.getElementById("error").textContent = data.error;
+        console.log(data.error);
     }
+    
 }
  
 fetch("/user?id=" + id) // Fetcher brukeren med id-en som ble sendt med fra login.js

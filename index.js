@@ -102,6 +102,19 @@ app.post("/session", function(request, response) { // lage nytt rom
     });
 })
 
+// add user to session
+function addUserToSession(sessionid, userid) {
+    const insertSql = "INSERT INTO user_session_conn (session_id, user_id) VALUES (?, ?)"; // spørring for å legge til bruker i rom
+    database.run(insertSql, [sessionid, userid], function(error) { // kjører spørringen
+        if (error) {
+            console.log("Bruker allerede i rom");
+        }
+        else {
+            console.log("Bruker lagt til i rom, userid = ", userid, "sessionid = ", sessionid);
+        }
+    });
+}
+
 app.post("/join", function(request, response) { 
     const sessionid = request.body.sessionid;
     const userid = request.body.userid;
@@ -116,6 +129,7 @@ app.post("/join", function(request, response) {
         }
         else {
             if (row) { // hvis det er en rad i databasen med den session-id-en
+                addUserToSession(sessionid, userid); // legger til brukeren i rommet
                 response.json({
                     "message": "Session joined successfully",
                     "data": row
