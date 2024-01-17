@@ -197,7 +197,6 @@ button {
   border: 2px solid var();
   background: var(--primary-color);
   cursor: pointer;
-  margin-top: 0.5rem;
   border-radius: 6px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bolder;
@@ -224,6 +223,22 @@ margin-top: 13rem;
 
 #writeWrapper {
   display: none;
+}
+
+.joinWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.joinWrap input {
+  padding: 10px;
+  width: 25%;
+}
+
+.joinWrap button {
+  width: 75%;
 }
 
 .write-field {

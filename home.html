@@ -48,7 +48,7 @@
             <!-- rom id 1 -->
             <li class="nav-link">
               <a href="#">
-                <i class="bx bx-save icon"></i> <!-- ikon ved siden av knapp -->
+                <i class="bx bx-save icon" id="saveIcon"></i> <!-- ikon ved siden av knapp -->
                 <span class="text nav-text" id="rom"></span> <!-- selve knappen -->
               </a>
             </li>
@@ -87,8 +87,10 @@
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
         <div class="button-container" id="roomBtn">
           <button onclick="createSession()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
-          <input type="number" id="roomInput">
-          <button onclick="joinSession()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+          <div class="joinWrap">
+            <input type="number" id="roomInput">
+            <button onclick="joinSession()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+          </div>
         </div>
       </div>
 

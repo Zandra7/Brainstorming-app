@@ -6,9 +6,11 @@ const user = document.getElementById("user")
 
 const roomBtn = document.getElementById("roomBtn")
 const writeWrapper = document.getElementById("writeWrapper")
+const saveIcon = document.getElementById("saveIcon")
 
 const rom = document.getElementById("rom")
 const roomInput = document.getElementById("roomInput")
+
 
 function reload() { // Reloader siden | Skal egentlig bare ta deg tilbake så du kan se de to knappene igjen
     location.reload()
@@ -38,7 +40,7 @@ function createSession() {
 
 function joinSession() {
     if (roomInput.value) {
-        
+
     }
 }
  
@@ -55,6 +57,10 @@ fetch("/user?id=" + id) // Fetcher brukeren med id-en som ble sendt med fra logi
     })
     .catch(error => console.error("Error:", error))
 
+if (!session) {
+    saveIcon.style.display = "none"
+}
+    
 if (session) {
     roomBtn.style.display = "none"
     writeWrapper.style.display = "block"
