@@ -102,15 +102,27 @@ app.post("/session", function(request, response) { // lage nytt rom
     });
 })
 
-app.get("/session", function(request, response) { // hente alle rom
-    let sqlSporring = "SELECT * FROM sessions"; // spørring for å hente alle rom
-    database.all(sqlSporring, function(error, rows) { // kjører spørringen
+app.post("/join", function(request, response) { 
+    const sessionid = request.body.sessionid;
+    const userid = request.body.userid;
+
+    let sqlSporring = "SELECT * FROM sessions WHERE id = ?"; // spørring for å hente rom med en bestemt session-id
+    let parameter = [request.body.sessionid]; // parameteren som skal settes inn i spørringen
+
+    database.get(sqlSporring, parameter, function(error, row) {
         if (error) {
-            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            response.status(500).json({"error": error});
             return;
         }
         else {
-            response.json({ "message": "Sessions fetched successfully", "data": rows}); // sender tilbake melding om at rommene er hentet
+            if (row) { // hvis det er en rad i databasen med den session-id-en
+                response.json({
+                    "message": "Session joined successfully",
+                    "data": row
+                });
+            } else {
+                response.status(400).json({"error": "Session not found"}); // sender tilbake melding om at rommet ikke ble funnet
+            }
         }
     });
 })
