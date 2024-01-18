@@ -65,18 +65,18 @@ async function joinSession() {
     }
 }
 
-async function addIdea() {
+async function addIdea() { // Legger til ideen i databasen
     const content = document.getElementById("idea").value;
-    const urlParameter = new URLSearchParams(window.location.search)
-    const userId = urlParameter.get("id")    
+    const urlParameter = new URLSearchParams(window.location.search) 
+    const userId = urlParameter.get("id")
     const sessionId = urlParameter.get("session")
 
-    const response = await fetch("/addidea", { // Fetcher fra /addidea pathen
+    const response = await fetch("/addidea", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({content: content, userid: userId, sessionid: sessionId}) // Sender id-en til brukeren som eier rommet
+        body: JSON.stringify({content: content, userid: userId, sessionid: sessionId}) // Sender innholdet i ideen, id-en til brukeren som la den til og id-en til rommet den ble lagt til i
     });
     console.log("addIdea har fetchet")
     document.getElementById("idea").value = "" // Tømmer input-feltet
@@ -84,13 +84,13 @@ async function addIdea() {
     if (response.ok) {
         const data = await response.json();
         console.log("addIdea har fått ok")
-        const ideas = document.getElementById("ideas")
-        const idea = document.createElement("li")
-        idea.textContent = content
-        ideas.appendChild(idea)
+        const ideas = document.getElementById("ideas") 
+        const idea = document.createElement("li") // Lager en ny li for hver ide
+        idea.textContent = content // Setter teksten i li-en til innholdet i ideen
+        ideas.appendChild(idea) // Legger til li-en i ul-en
     } else {
         const data = await response.json();
-        document.getElementById("error").textContent = data.error;
+        document.getElementById("error").textContent = data.error; 
         console.log(data.error);
     }
 }
