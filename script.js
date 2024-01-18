@@ -1,9 +1,11 @@
+// Kode som inkluderes i Index.html og Signup.html:
+
 async function login(event){
     event.preventDefault(); // Hindrer formen fra å submitte
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
-    const respons = await fetch("/", { // Fetcher fra / pathen
+    const respons = await fetch("/login", { // Fetcher fra /login pathen
         method:"POST", 
         headers:{
             "Content-Type":"application/json"

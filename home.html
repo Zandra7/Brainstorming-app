@@ -48,8 +48,8 @@
             <!-- rom id 1 -->
             <li class="nav-link">
               <a href="#">
-                <i class="bx bx-save icon"></i> <!-- ikon ved siden av knapp -->
-                <span class="text nav-text">Rom ID 1</span> <!-- selve knappen -->
+                <i class="bx bx-save icon" id="saveIcon"></i> <!-- ikon ved siden av knapp -->
+                <span class="text nav-text" id="rom"></span> <!-- selve knappen -->
               </a>
             </li>
           </ul>
@@ -66,7 +66,7 @@
 
           <!-- "Logg ut" knapp på bunnen av sidebar -->
           <li class="">
-            <a href="Signup.html">
+            <a onclick="logout()">
               <i class="bx bx-log-out icon"></i> <!-- ikon ved siden av knapp -->
               <span class="text nav-text">Logout</span> <!-- selve knappen -->
             </a>
@@ -86,17 +86,24 @@
       <div class="title">
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
         <div class="button-container" id="roomBtn">
-          <button onclick="hideBtn()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
-          <button onclick="hideBtn()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+          <button onclick="createSession()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
+          <div class="joinWrap">
+            <input type="number" id="roomInput">
+            <button onclick="joinSession()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+          </div>
+        </div>
+        <div id="ideas">
+          <!-- ideer som blir lagt til kommer her -->
         </div>
       </div>
 
       <!-- Felt for å skrive ideer -->
       <div id="writeWrapper">
         <div class="write-field">
-          <input type="text" class="addIdea" placeholder="Skriv en ide">
-          <i class='bx bx-send'></i>
+          <input type="text" class="addIdea" placeholder="Skriv en ide" id="idea">
+          <div onclick="addIdea()"><i class='bx bx-send'></i></div>
         </div>
+        <p id="error"></p>
       </div>
     </main>
   </body>
