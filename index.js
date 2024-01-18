@@ -88,7 +88,8 @@ app.post("/logout", function(request, response){
     console.log("Logget ut brukerid: ", request.body.id)
 })
 
-app.post("/signup", function(request, response) { // registrere ny bruker
+// registrere ny bruker
+app.post("/signup", function(request, response) { 
     const username = request.body.username; 
     const password = request.body.password; 
     const insertSql = "INSERT INTO users (username, password) VALUES (?, ?)"; // spørring for å legge til bruker i databasen
@@ -107,27 +108,6 @@ app.post("/signup", function(request, response) { // registrere ny bruker
     });
 });
 
-app.post("/session", function(request, response) { // lage nytt rom
-    const owner = request.body.owner; 
-    const insertSql = "INSERT INTO sessions (owner) VALUES (?)"; // spørring for å legge til rom i databasen
-    database.run(insertSql, [owner], function(error) { // kjører spørringen
-        if (error) {
-            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
-            return;
-        }
-        else {
-            console.log("Nytt rom har id=",this.lastID);
-            response.json({ // sender tilbake melding om at rommet er opprettet
-                "message": "Session created successfully",
-                "data": {
-                    "new_sessionid" : this.lastID,
-                    "owner": owner
-                }
-            });
-        }
-    });
-})
-
 // add user to session
 function addUserToSession(sessionid, userid) {
     const insertSql = "INSERT INTO user_session_conn (session_id, user_id) VALUES (?, ?)"; // spørring for å legge til bruker i rom
@@ -141,7 +121,31 @@ function addUserToSession(sessionid, userid) {
     });
 }
 
-app.post("/join", function(request, response) { 
+// lage nytt rom
+app.post("/session", function(request, response) {
+    const owner = request.body.owner; 
+    const insertSql = "INSERT INTO sessions (owner) VALUES (?)"; // spørring for å legge til rom i databasen
+    database.run(insertSql, [owner], function(error) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error": error}); // sender tilbake melding om at det har skjedd en feil
+            return;
+        }
+        else {
+            addUserToSession(this.lastID, owner); // legger til brukeren i rommet
+            console.log("Nytt rom har id=",this.lastID);
+            response.json({ // sender tilbake melding om at rommet er opprettet
+                "message": "Session created successfully",
+                "data": {
+                    "new_sessionid" : this.lastID,
+                    "owner": owner
+                }
+            });
+        }
+    });
+})
+
+// legge til bruker i rom
+app.post("/join", function(request, response) {
     const sessionid = request.body.sessionid;
     const userid = request.body.userid;
 
@@ -194,7 +198,7 @@ app.post("/addidea", function(request, response) { // legge til ide i rom
     });
 })
 
-app.get('/ideas', function(request, response){
+app.get('/ideas', function(request, response){ // hente ideer
     let sqlSporring = "SELECT * FROM ideas WHERE session_id = ? ORDER BY id" // spørring for å hente ideer med en bestemt session-id
     let parameter = [request.query.sessionid] // parameteren som skal settes inn i spørringen
 
@@ -212,6 +216,46 @@ app.get('/ideas', function(request, response){
             response.status(400).json({"error":"Ideer ikke funnet"}) // sender tilbake melding om at ideene ikke ble funnet
         }
     })
+})
+
+// hent alle aktive brukere dersom man er logget inn som eier av sessionen
+app.get('/activeusers', function(request, response){
+    let parameter = [request.query.userid] // parameteren som skal settes inn i spørringen
+    // skjekker om du er eier av en session
+    let sqlSporring = "SELECT * FROM sessions WHERE owner = ?"
+    database.all(sqlSporring, parameter, function(error, rows) { // kjører spørringen
+        if (error) {
+            response.status(500).json({"error":error.message}) // internal database error
+            return
+        }
+        if (rows.length>0) { // hvis det er en rad i databasen med den bruker-id-en
+            let sqlSporring = "SELECT * FROM users WHERE active = 1" // spørring for å hente aktive brukere
+            database.all(sqlSporring, function(error, rows) { // kjører spørringen
+                if (error) {
+                    response.status(500).json({"error":error.message}) // internal database error
+                    return
+                }
+                if (rows) { // hvis det er en rad i databasen med den bruker-id-en
+                    response.json({ 
+                        "melding":"suksess",
+                        "data": rows 
+                    })
+                    console.log("Aktive brukere", rows)
+                } else {
+                    response.json({
+                        "melding":"suksess, men ingen aktive brukere",
+                        "data": [] 
+                    })
+                } 
+            })
+        } else {
+            response.json({
+                "melding":"suksess, men du er ikke eier av et rom",
+                "data": [] 
+            })
+        }
+    })
+
 })
 
 app.listen(portNummer, function(){ // starter serveren

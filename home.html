@@ -73,12 +73,6 @@
           </li>
         </div> 
         <!-- "Lag nytt rom" knapp neders på sideskjermen -->
-        <li class="ny-Rom">
-          <a href="#">
-            <i class="bx bx-add-to-queue icon"></i> <!-- ikon ved siden av tekst -->
-            <span class="text nav-text" onclick="hideBtn()">Lag nytt rom</span>
-          </a>
-        </li>
       </div>
     </nav>
     <!-- Det som visers utenfor sidebaren -->
@@ -88,13 +82,13 @@
         <div class="button-container" id="roomBtn">
           <button onclick="createSession()">Lag nytt rom</button> <!-- knapp hvor du lager nytt rom -->
           <div class="joinWrap">
-            <input type="number" id="roomInput" placeholder="Rom-ID">
-            <button onclick="joinSession()">Bli med i et rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
+            <input type="number" placeholder="Rom-ID" id="roomInput">
+            <button onclick="joinSession()">Bli med i rom</button> <!-- knappe for å bli med i ett rom som allerede eksisterer-->
           </div>
         </div>
-        <div id="ideas">
+        <ul id="ideas">
           <!-- ideer som blir lagt til kommer her -->
-        </div>
+        </ul>
       </div>
 
       <!-- Felt for å skrive ideer -->
@@ -105,6 +99,9 @@
         </div>
         <p id="error"></p>
       </div>
+      <ul id="activeUsers">
+        <!-- brukere som er aktive i rommet kommer her -->
+      </ul>
     </main>
   </body>
   <script src="home.js"></script>
