@@ -46,7 +46,7 @@ app.post("/login", function(request, response){
     let parameter = [request.body.username, request.body.password] // parameterene som skal settes inn i spørringen
 
     database.get(sqlSporring, parameter, function(error, row){ // kjører spørringen
-        if (error) { 
+        if (error) {
             response.status(500).json({"error":error.message}) // internal database error
             return
         }
@@ -55,11 +55,37 @@ app.post("/login", function(request, response){
                 "melding":"suksess",
                 "data": row 
             })
+            // kjør spørring som setter aktiv i users tabellen til 1
+            let sqlSporring = "UPDATE users SET active = 1 WHERE id = ?" 
+            let parameter = [row.id] // parameteren som skal settes inn i spørringen
+            database.run(sqlSporring, parameter, function(error){ // kjører spørringen
+                if (error) {
+                    console.log(error.message)
+                } else {
+                    console.log("Bruker aktivert")
+                }
+            })
             console.log("Logget inn", row)
         } else { 
             response.status(400).json({"error":"Feil brukernavn eller passord"}) // sender tilbake melding om at det er feil brukernavn eller passord
         }
     })
+})
+
+app.post("/logout", function(request, response){
+    let parameter = [request.body.id] // parameteren som skal settes inn i spørringe
+    // kjør spørring som setter aktiv i users tabellen til 0
+    let sqlSporring = "UPDATE users SET active = 0 WHERE id = ?" 
+    database.run(sqlSporring, parameter, function(error){ // kjører spørringen
+        if (error) {
+            console.log(error.message)
+            response.status(500).json({"error":error.message}) // internal database error
+        } else {
+            console.log("Bruker deaktivert")
+            response.json({ "message": "Logged out successfully"}); // sender tilbake melding om at brukeren har logget ut
+        }
+    })
+    console.log("Logget ut brukerid: ", request.body.id)
 })
 
 app.post("/signup", function(request, response) { // registrere ny bruker

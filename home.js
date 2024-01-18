@@ -93,7 +93,28 @@ async function addIdea() {
         console.log(data.error);
     }
 }
- 
+
+async function logout() {
+    const response = await fetch("/logout", { // Fetcher fra /session pathen
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({id: id}) // Sender id-en til brukeren som eier rommet
+    });
+    console.log("logout har fetchet")
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log("logout har fått ok")
+        window.location.href = "index.html" // Redirect til index.html
+    } else {
+        const data = await response.json();
+        document.getElementById("error").textContent = data.error;
+        console.log(data.error);
+    }
+}
+
 fetch("/user?id=" + id) // Fetcher brukeren med id-en som ble sendt med fra login.js
     .then(response => response.json())
     .then(function(data){
