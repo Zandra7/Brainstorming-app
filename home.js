@@ -71,7 +71,7 @@ async function addIdea() {
     const userId = urlParameter.get("id")    
     const sessionId = urlParameter.get("session")
 
-    const response = await fetch("/addidea", { // Fetcher fra /session pathen
+    const response = await fetch("/addidea", { // Fetcher fra /addidea pathen
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -79,6 +79,7 @@ async function addIdea() {
         body: JSON.stringify({content: content, userid: userId, sessionid: sessionId}) // Sender id-en til brukeren som eier rommet
     });
     console.log("addIdea har fetchet")
+    document.getElementById("idea").value = "" // Tømmer input-feltet
 
     if (response.ok) {
         const data = await response.json();
