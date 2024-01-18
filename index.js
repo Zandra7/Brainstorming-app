@@ -194,7 +194,7 @@ app.post("/addidea", function(request, response) { // legge til ide i rom
     });
 })
 
-app.get('/ideas', function(request, response){
+app.get('/ideas', function(request, response){ // hente ideer
     let sqlSporring = "SELECT * FROM ideas WHERE session_id = ? ORDER BY id" // spørring for å hente ideer med en bestemt session-id
     let parameter = [request.query.sessionid] // parameteren som skal settes inn i spørringen
 
