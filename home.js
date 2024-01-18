@@ -156,4 +156,23 @@ if (session) {
             }
         })
         .catch(error => console.error("Error:", error))
+
+    fetch("/activeusers?userid=" + id + "&sessionid=" + session) // Fetcher aktive brukere med bruker-id-en og session-id-en som ble sendt med fra login.js
+        .then(response => response.json())
+        .then(function(data){
+            console.log("Fetch activeusers returnerte:", data)
+            if (data.error) {
+                document.getElementById("error").textContent = data.error 
+            } 
+            else {
+                const activeUsers = document.getElementById("activeUsers")
+                for (let i = 0; i < data.data.length; i++) {
+                    const user = document.createElement("li")
+                    user.textContent = data.data[i].username
+                    activeUsers.appendChild(user)
+                }
+            }
+        })
+        .catch(error => console.error("Error:", error))
+
 }
