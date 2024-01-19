@@ -77,6 +77,7 @@
     </nav>
     <!-- Det som visers utenfor sidebaren -->
     <main>
+      <div class="left"></div>
       <div class="title">
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
         <div class="button-container" id="roomBtn">
@@ -90,6 +91,11 @@
           <!-- ideer som blir lagt til kommer her -->
         </ul>
       </div>
+      <div class="right">
+        <ul id="activeUsers">
+        <!-- brukere som er aktive i rommet kommer her -->
+        </ul>
+      </div>
 
       <!-- Felt for å skrive ideer -->
       <div id="writeWrapper">
@@ -99,9 +105,7 @@
         </div>
         <p id="error"></p>
       </div>
-      <ul id="activeUsers">
-        <!-- brukere som er aktive i rommet kommer her -->
-      </ul>
+      
     </main>
   </body>
   <script src="home.js"></script>
