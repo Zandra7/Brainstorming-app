@@ -36,6 +36,10 @@ Brainstorming er en kreativ plattform som gir deg og dine venner muligheten til 
 * `Style.css` og `home.css`: Stilark for appens brukergrensesnitt.
 * `Index.html`, `Signup.html`, `home.html`: HTML-filene som utgjør brukergrensesnittet for appen.
 
+## Feilsøking
+* `SQLITE_READONLY: attempt to write a readonly database`: Feil i databasen. Kan løses ved å kjøre index.js filen med `node index.js`.
+* `Home` knappen funker ikke. Fjern `id` og `session` fra URL-en for å gå til samme sted.
+
 ## Lenker og andre ressurser
 ### Brukermanual:
 [Link til skriftlig brukermanual](Brukermanual%20Nettside%20for%20Medieproduksjon%20med%20Alf%20Johannesen.pdf)
