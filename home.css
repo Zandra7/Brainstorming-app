@@ -194,6 +194,7 @@ main {
     "left title right"
     "left content right";
   grid-template-columns: 15% 70% 15%;
+  flex-direction: column;
 }
 
 .left {
@@ -207,10 +208,6 @@ main {
   color: #FFC107;
   text-align: center;
   padding-top: 1rem;
-}
-
-.right {
-  grid-area: right;
 }
 
 #activeUsers li {
@@ -313,11 +310,18 @@ margin-top: 13rem;
 }
 
 #activeUsers li {
-  position: absolute;
   right: 0;
   padding-right: 50px;
   list-style: none;
   font-size: 20px;
+}
+
+#activeUsers {
+  right: 0;
+}
+
+.right {
+  grid-area: right;
 }
 
 .sidebar li a:hover {
