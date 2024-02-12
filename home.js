@@ -11,6 +11,7 @@ const saveIcon = document.getElementById("saveIcon")
 const rom = document.getElementById("rom")
 const roomInput = document.getElementById("roomInput")
 
+const romId = document.getElementById("romId")
 
 function reload() { // Reloader siden | Skal egentlig bare ta deg tilbake så du kan se de to knappene igjen
     location.reload()
@@ -138,6 +139,8 @@ if (session) {
     writeWrapper.style.display = "block"
 
     rom.textContent = "Rom: " + session
+    romId.textContent = session
+
 
     fetch("/ideas?sessionid=" + session) // Fetcher ideene med session-id-en som ble sendt med fra login.js
         .then(response => response.json())
