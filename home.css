@@ -334,3 +334,9 @@ margin-top: 13rem;
   color: var(--sidebar-color);
   transition: all 0.5s ease;
 }
+
+.Id {
+  padding-left: 2rem;
+  padding-top: 2rem;
+  color: #FFC107;
+}

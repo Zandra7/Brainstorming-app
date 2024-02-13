@@ -29,9 +29,6 @@
             </div>
           </div>
         </div> 
-        <span class="material-symbols-outlined" onclick="hideBtn()">
-          edit_square
-        </span>
       </header>
       <!-- dashboard Search -->
       <div class="menu-bar">
@@ -56,16 +53,8 @@
           </ul>
         </div>
 
-        <!-- "Hjelp" knapp og ikon på bunnen av sidebar -->
+        <!-- "Logg ut" knapp på bunnen av sidebar -->
         <div class="bottom-content">
-          <li class="">
-            <a href="#">
-              <i class='bx bx-question-mark' undefined ></i> <!-- ikon ved siden av knapp -->
-              <span class="text nav-text">Help</span> <!-- selve knappen -->
-            </a>
-          </li>
-
-          <!-- "Logg ut" knapp på bunnen av sidebar -->
           <li class="">
             <a onclick="logout()">
               <i class="bx bx-log-out icon"></i> <!-- ikon ved siden av knapp -->
@@ -78,7 +67,9 @@
     </nav>
     <!-- Det som visers utenfor sidebaren -->
     <main>
-      <div class="left"></div>
+      <div class="left">
+        <h2 class="Id">Rom-ID: <span id="romId"></span></h2>
+      </div>
       <div class="title">
         <h1>Brainstorm</h1> <!-- Hovedtittel / navn-->
         <div class="button-container" id="roomBtn">
