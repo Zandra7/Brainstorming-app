@@ -96,6 +96,10 @@ async function addIdea() { // Legger til ideen i databasen
     }
 }
 
+function goHome() {
+    window.location.href = "home.html?id="+id // Redirect til home.html
+}
+
 async function logout() {
     const response = await fetch("/logout", { // Fetcher fra /session pathen
         method: "POST",
